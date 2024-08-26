@@ -1,0 +1,19 @@
+@startuml
+object Hauptseite {
+    buttonTetris
+    buttonSnake
+}
+object Tetris {
+    board
+    --
+    piece
+}
+object Snake {
+    board
+    --
+    snake
+    apple
+}
+Hauptseite <--> Tetris
+Hauptseite <--> Snake
+@enduml

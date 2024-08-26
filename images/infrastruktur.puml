@@ -1,0 +1,141 @@
+@startuml
+package GithubServer {
+    object ServerHauptseite {
+        buttonTetris
+        buttonSnake
+    }
+    object ServerTetris {
+        board
+        --
+        piece
+    }
+    object ServerSnake {
+        board
+        --
+        snake
+        apple
+    }
+}
+package GithubRepo{
+    package noigames {
+        package Hauptseite {
+            package html as h1 {
+                component 1 [
+                    title
+                    underTitle
+                    buttonTetris
+                    buttonSnake
+                ]
+            }
+            package css as c1 {
+                component 2 [
+                    body
+                    header
+                    main
+                    nav
+                    aside
+                    footer
+                    div
+                    title
+                    description
+                    button
+                    button:hover
+                ]
+            }
+        }
+        package Tetris {
+            package html as h2 {
+                component 3 [
+                    canvas id="board"
+                ]
+                component 11 [
+                    span id"score"
+                    span id"highscore"
+                    span id"lines"
+                    span id"level"
+                ]
+                component 12 [
+                    div id="title"
+                    button
+                ]
+            }
+            package css as c2{
+                component 4 [
+                    game-board
+                    next
+                    split
+                    marginRight
+                    marginLeft
+                ]
+            }
+            package JavaScript as j1 {
+                component 5 [
+                    board
+                ]
+                component 9 [
+                    piece
+                ]
+                component 10 [
+                    score
+                    highscore
+                    lines
+                    level
+                ]
+            }
+        }
+        package Snake {
+            package html as h3 {
+                component 6 [
+                    canvas id="board"
+                ]
+                component 15 [
+                    span id"score"
+                    span id"highscore"
+                ]
+                component 16 [
+                div id="title"
+                    button
+                ]
+            }
+            package css as c3 {
+                component 7 [
+                    snakeboard
+                    boardSize
+                    slider
+                ]
+            }
+            package JavaScript as j2{
+                component 8 [
+                    board
+                ]
+                component 12 [
+                    snake
+                ]
+                component 13 [
+                    apple
+                ]
+                component 14 [
+                    score
+                    highscore
+                ]
+            }
+        }
+    }
+}
+Hauptseite <--> Snake
+Tetris <----> Hauptseite
+
+ServerHauptseite <--> ServerTetris
+ServerHauptseite <--> ServerSnake
+
+GithubRepo --> GithubServer
+5 <- 9
+5 --> 3
+10 -> 11
+c2 --> h2
+8 <- 12
+8 <-- 13
+14 --> 15
+8 -> 6
+c3 --> h3
+@enduml

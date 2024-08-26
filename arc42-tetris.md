@@ -172,6 +172,9 @@ Methoden die das ganze wiederholen, die die Form und das Board reseten wenn game
 Wenn man am Schluss alle diese Methode zusammen nimmt und in die richtige Reihenfolge bringt,  
 funktioniert das Tetris Spiel automatisch.
 
+**Form**  
+
+
 **Ebene 1**
 Tetris
 
@@ -183,11 +186,13 @@ Pieces
 
 ## Whitebox Gesamtsystem
 
-| Ebene 1    | Ebene 2               | Ebene 3              |
-|------------|-----------------------|----------------------|
-| Hauptseite | html, css             | div, button, main... |
-| Tetris     | JavaScript, html, css | div, button, main... |
-| Snake      | JavaScript, html, css | div, button, main... |
+| Ebene 1    | Ebene 2 | Ebene 3      |
+|------------|---------|--------------|
+| Hauptseite | button  | button name  |
+| Tetris     | Board   | piece        |
+| Snake      | Board   | snake, apple |
+
+![](images/bausteinsichtForm.png)
 
 Begründung
 
@@ -229,27 +234,22 @@ Wichtige Schnittstellen
   - Auf dieser Seite kann man das Spiel Snake spielen.
 
 ## Ebene 2
-### JavaScript  
+### Board  
 
-- Übernimmt die Funktionsfähigkeit der Spiele, also die ganze Logik.
+- in diesem Board werden dann alle Funktionen angezeigt.
 
-### html
+### Buttons
 
-- Das wird benötigt, um das was in der JavaScript Datei steht, anzuzeigen.
-
-### css
-
-- Diese Datei ist optional, aber sie verschönert die Seite um einiges und macht so das benutzen nutzerfreundlicher.  
+- die buttons sind dafür da, das Spiel zu starten, den highscore zu reseten und um zurück auf die Hauptseite zu kommen,  
+  je nachdem welchen button man drückt.  
 
 ## Ebene 3
 ### Whitebox JavaScript
 
-- move()
-  - diese Methode ist dazu da, das Piece zu bewegen
-- drawPiece()
-  - diese Methode ist dazu da, das Piece zu malen. Das Board ist wie eine Wandtafel und diese Methode ist die Kreide.
-- clearLine()
-  - diese Methode entfernt eine Linie, wenn sie komplett ausgefüllt ist.
+- Tetris
+  - das Board zeigt die pieces an, die langsam runter fallen.
+- Snake
+  - das Board zeigt hier die snake an und den Apfel
 
 # Laufzeitsicht
 
@@ -291,336 +291,64 @@ Hierfür habe ich zu wenig Anpassungsmöglichkeiten.
 
 **Form**
 
-Server <- Github <- Projekt
+![](images/infrastruktur.png)
 
 ## Infrastruktur Ebene 1
 
-An dieser Stelle beschreiben Sie (als Kombination von Diagrammen mit
-Tabellen oder Texten):
-
-- die Verteilung des Gesamtsystems auf mehrere Standorte, Umgebungen,
-  Rechner, Prozessoren o. Ä., sowie die physischen Verbindungskanäle
-  zwischen diesen,
-
-- wichtige Begründungen für diese Verteilungsstruktur,
-
-- Qualitäts- und/oder Leistungsmerkmale dieser Infrastruktur,
-
-- Zuordnung von Softwareartefakten zu Bestandteilen der Infrastruktur
-
-Für mehrere Umgebungen oder alternative Deployments kopieren Sie diesen
-Teil von arc42 für alle wichtigen Umgebungen/Varianten.
-
-Snake <-- Hauptseite --> Tetris
-
-Begründung
-
-:   *\<Erläuternder Text\>*
-
-Qualitäts- und/oder Leistungsmerkmale
-
-:   *\<Erläuternder Text\>*
-
-Zuordnung von Bausteinen zu Infrastruktur
-
-:   *\<Beschreibung der Zuordnung\>*
+In der 1. Ebene wird alles in Seiten aufgebaut.  
+Bis jetzt habe ich 3 Seiten: Hauptseite, Tetris und Snake.  
+Wenn ich Lust habe, könnte ich noch mehr Spiele hinzufügen.
 
 ## Infrastruktur Ebene 2
 
-In jeder 2. Ebene ist alles gleich aufgebaut, ausser die Hauptseite, da sie keine Funktionen hat,  
-wie die Spiele mit JavaScript.  
+In der 2. Ebene werden die einzelnen Seiten in Programmiersprache unterteilt.  
+Die Spiele jeweils haben 3 Sprachen: html, JavaScript und css.  
+Die einzige ausnahem ist die Hauptseite, da die nur 2 Sprachen hat: html und css, weil diese Seite keine besonderen Funktionen hat,  
+ausser das Anzeige der verschieden Spiele.  
 
 # Querschnittliche Konzepte
 **Inhalt**
 
-Dieser Abschnitt beschreibt übergreifende, prinzipielle Regelungen und
-Lösungsansätze, die an mehreren Stellen (=*querschnittlich*) relevant
-sind.
+Das ganze ist ganz simpel aufgebaut.  
+Man hat eine Hauptseite auf der man alle Spiele sieht, die ich implementiert hat.
 
-Solche Konzepte betreffen oft mehrere Bausteine. Dazu können vielerlei
-Themen gehören, beispielsweise:
-
-- Modelle, insbesondere fachliche Modelle
-
-- Architektur- oder Entwurfsmuster
-
-- Regeln für den konkreten Einsatz von Technologien
-
-- prinzipielle --- meist technische --- Festlegungen übergreifender
-  Art
-
-- Implementierungsregeln
-
-::: formalpara-title
 **Motivation**
-:::
 
-Konzepte bilden die Grundlage für *konzeptionelle Integrität*
-(Konsistenz, Homogenität) der Architektur und damit eine wesentliche
-Grundlage für die innere Qualität Ihrer Systeme.
-
-Manche dieser Themen lassen sich nur schwer als Baustein in der
-Architektur unterbringen (z.B. das Thema „Sicherheit").
-
-::: formalpara-title
-**Form**
-:::
-
-Kann vielfältig sein:
-
-- Konzeptpapiere mit beliebiger Gliederung,
-
-- übergreifende Modelle/Szenarien mit Notationen, die Sie auch in den
-  Architektursichten nutzen,
-
-- beispielhafte Implementierung speziell für technische Konzepte,
-
-- Verweise auf „übliche" Nutzung von Standard-Frameworks
-  (beispielsweise die Nutzung von Hibernate als Object/Relational
-  Mapper).
-
-::: formalpara-title
-**Struktur**
-:::
-
-Eine mögliche (nicht aber notwendige!) Untergliederung dieses
-Abschnittes könnte wie folgt aussehen (wobei die Zuordnung von Themen zu
-den Gruppen nicht immer eindeutig ist):
-
-- Fachliche Konzepte
-
-- User Experience (UX)
-
-- Sicherheitskonzepte (Safety und Security)
-
-- Architektur- und Entwurfsmuster
-
-- Unter-der-Haube
-
-- Entwicklungskonzepte
-
-- Betriebskonzepte
-
-![Possible topics for crosscutting
-concepts](images/08-Crosscutting-Concepts-Structure-DE.png)
-
-Siehe [Querschnittliche Konzepte](https://docs.arc42.org/section-8/) in
-der online-Dokumentation (auf Englisch).
-
-## *\<Konzept 1\>*
-
-*\<Erklärung\>*
-
-## *\<Konzept 2\>*
-
-*\<Erklärung\>*
-
-...
-
-## *\<Konzept n\>*
-
-*\<Erklärung\>*
+Der übersichtliche Aufbau
 
 # Architekturentscheidungen
 
-::: formalpara-title
 **Inhalt**
-:::
 
-Wichtige, teure, große oder riskante Architektur- oder
-Entwurfsentscheidungen inklusive der jeweiligen Begründungen. Mit
-\"Entscheidungen\" meinen wir hier die Auswahl einer von mehreren
-Alternativen unter vorgegebenen Kriterien.
+Das Wichtigste, was zur Architektur beitragt ist Github.
 
-Wägen Sie ab, inwiefern Sie Entscheidungen hier zentral beschreiben,
-oder wo eine lokale Beschreibung (z.B. in der Whitebox-Sicht von
-Bausteinen) sinnvoller ist. Vermeiden Sie Redundanz. Verweisen Sie evtl.
-auf Abschnitt 4, wo schon grundlegende strategische Entscheidungen
-beschrieben wurden.
-
-::: formalpara-title
 **Motivation**
-:::
 
-Stakeholder des Systems sollten wichtige Entscheidungen verstehen und
-nachvollziehen können.
-
-::: formalpara-title
-**Form**
-:::
-
-Verschiedene Möglichkeiten:
-
-- ADR ([Documenting Architecture
-  Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions))
-  für jede wichtige Entscheidung
-
-- Liste oder Tabelle, nach Wichtigkeit und Tragweite der
-  Entscheidungen geordnet
-
-- ausführlicher in Form einzelner Unterkapitel je Entscheidung
-
-Siehe [Architekturentscheidungen](https://docs.arc42.org/section-9/) in
-der arc42 Dokumentation (auf Englisch!). Dort finden Sie Links und
-Beispiele zum Thema ADR.
+Da ich mit Github, mein Project schnell und einfach im Internet speichern kann.  
+Zusätzlich kann ich meine Spiele direkt auf dem Server laufen lassen und so ohne grosse Konfiguration von überall drauf zugreifen.
 
 # Qualitätsanforderungen
 
-::: formalpara-title
 **Inhalt**
-:::
 
-Dieser Abschnitt enthält möglichst alle Qualitätsanforderungen als
-Qualitätsbaum mit Szenarien. Die wichtigsten davon haben Sie bereits in
-Abschnitt 1.2 (Qualitätsziele) hervorgehoben.
-
-Nehmen Sie hier auch Qualitätsanforderungen geringerer Priorität auf,
-deren Nichteinhaltung oder -erreichung geringe Risiken birgt.
-
-::: formalpara-title
-**Motivation**
-:::
-
-Weil Qualitätsanforderungen die Architekturentscheidungen oft maßgeblich
-beeinflussen, sollten Sie die für Ihre Stakeholder relevanten
-Qualitätsanforderungen kennen, möglichst konkret und operationalisiert.
-
-::: formalpara-title
-**Weiterführende Informationen**
-:::
-
-Siehe [Qualitätsanforderungen](https://docs.arc42.org/section-10/) in
-der online-Dokumentation (auf Englisch!).
-
-## Qualitätsbaum
-
-::: formalpara-title
-**Inhalt**
-:::
-
-Der Qualitätsbaum (à la ATAM) mit Qualitätsszenarien an den Blättern.
-
-::: formalpara-title
-**Motivation**
-:::
-
-Die mit Prioritäten versehene Baumstruktur gibt Überblick über
-die --- oftmals zahlreichen --- Qualitätsanforderungen.
-
-- Baumartige Verfeinerung des Begriffes „Qualität", mit „Qualität"
-  oder „Nützlichkeit" als Wurzel.
-
-- Mindmap mit Qualitätsoberbegriffen als Hauptzweige
-
-In jedem Fall sollten Sie hier Verweise auf die Qualitätsszenarien des
-folgenden Abschnittes aufnehmen.
+Das Design immer gleich halten um so Verwirrung zu vermeiden.  
 
 ## Qualitätsszenarien
 
-::: formalpara-title
 **Inhalt**
-:::
 
-Konkretisierung der (in der Praxis oftmals vagen oder impliziten)
-Qualitätsanforderungen durch (Qualitäts-)Szenarien.
+Ein Szenario könnte sein, dass wenn ich bei einem Spiel ein Fehler einbaue,  
+kann man so das Spiel nicht mehr richtig spielen und das wiederum wirkt sich auf die Motivation der Spieler aus.
 
-Diese Szenarien beschreiben, was beim Eintreffen eines Stimulus auf ein
-System in bestimmten Situationen geschieht.
-
-Wesentlich sind zwei Arten von Szenarien:
-
-- Nutzungsszenarien (auch bekannt als Anwendungs- oder
-  Anwendungsfallszenarien) beschreiben, wie das System zur Laufzeit
-  auf einen bestimmten Auslöser reagieren soll. Hierunter fallen auch
-  Szenarien zur Beschreibung von Effizienz oder Performance. Beispiel:
-  Das System beantwortet eine Benutzeranfrage innerhalb einer Sekunde.
-
-- Änderungsszenarien beschreiben eine Modifikation des Systems oder
-  seiner unmittelbaren Umgebung. Beispiel: Eine zusätzliche
-  Funktionalität wird implementiert oder die Anforderung an ein
-  Qualitätsmerkmal ändert sich.
-
-::: formalpara-title
 **Motivation**
-:::
 
-Szenarien operationalisieren Qualitätsanforderungen und machen deren
-Erfüllung mess- oder entscheidbar.
-
-Insbesondere wenn Sie die Qualität Ihrer Architektur mit Methoden wie
-ATAM überprüfen wollen, bedürfen die in Abschnitt 1.2 genannten
-Qualitätsziele einer weiteren Präzisierung bis auf die Ebene von
-diskutierbaren und nachprüfbaren Szenarien.
-
-::: formalpara-title
-**Form**
-:::
-
-Entweder tabellarisch oder als Freitext.
+Bevor man also ein Update des Spiels macht, sollte man zuerst überprüfen,  
+ob das Spiel einwandfrei funktioniert.  
 
 # Risiken und technische Schulden
 
-::: formalpara-title
-**Inhalt**
-:::
-
-Eine nach Prioritäten geordnete Liste der erkannten Architekturrisiken
-und/oder technischen Schulden.
-
-> Risikomanagement ist Projektmanagement für Erwachsene.
->
-> --- Tim Lister Atlantic Systems Guild
-
-Unter diesem Motto sollten Sie Architekturrisiken und/oder technische
-Schulden gezielt ermitteln, bewerten und Ihren Management-Stakeholdern
-(z.B. Projektleitung, Product-Owner) transparent machen.
-
-::: formalpara-title
 **Form**
-:::
 
-Liste oder Tabelle von Risiken und/oder technischen Schulden, eventuell
-mit vorgeschlagenen Maßnahmen zur Risikovermeidung, Risikominimierung
-oder dem Abbau der technischen Schulden.
-
-Siehe [Risiken und technische
-Schulden](https://docs.arc42.org/section-11/) in der
-online-Dokumentation (auf Englisch!).
-
-# Glossar
-
-::: formalpara-title
-**Inhalt**
-:::
-
-Die wesentlichen fachlichen und technischen Begriffe, die Stakeholder im
-Zusammenhang mit dem System verwenden.
-
-Nutzen Sie das Glossar ebenfalls als Übersetzungsreferenz, falls Sie in
-mehrsprachigen Teams arbeiten.
-
-::: formalpara-title
-**Motivation**
-:::
-
-Sie sollten relevante Begriffe klar definieren, so dass alle Beteiligten
-
-- diese Begriffe identisch verstehen, und
-
-- vermeiden, mehrere Begriffe für die gleiche Sache zu haben.
-
-```{=html}
-<!-- -->
-```
-
-- Zweispaltige Tabelle mit \<Begriff\> und \<Definition\>
-
-- Eventuell weitere Spalten mit Übersetzungen, falls notwendig.
-
-Siehe [Glossar](https://docs.arc42.org/section-12/) in der
-online-Dokumentation (auf Englisch!).
-
-| Begriff               | Definition                                    |
-|-----------------------|-----------------------------------------------|
-| *\<Begriff-1\>*       | *\<Definition-1\>*                            |
-| *\<Begriff-2*         | *\<Definition-2\>*                            |
+- Funktionalität
+- Übersichtlichkeit
+- Design
